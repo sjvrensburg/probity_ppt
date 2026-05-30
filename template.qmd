@@ -58,6 +58,15 @@ caveats.
 - Stress :: Drop the FY 2020/21 anomaly and refit. Report how far the fit moves.
 - Apply :: Scale every cell of the provision matrix by the single multiplier alpha.
 
+## Code renders in Consolas
+
+Inline code such as `alpha <- 1` and fenced blocks use Consolas:
+
+```r
+fit <- lm(loss_rate ~ gdp_lag1, data = panel)
+summary(fit)$r.squared
+```
+
 ## A native chart
 
 ```{r}

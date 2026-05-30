@@ -238,6 +238,7 @@ Before declaring done, grep the source for voice violations and fix them:
 | Muted text | `#6B7280` |
 | Rule / hairline | `#D5DEE9` |
 | Font | Calibri |
+| Mono / code | Consolas |
 
 Palette discipline: **navy dominates** (about 70% weight): titles, table
 headers, chart bars, hairlines. **Gold is the accent only**: the left stripe
@@ -267,6 +268,10 @@ plus a hairline rule is the only chrome a content slide needs.
   rows.
 - **Stat cards and three-card rows**: drawn by the `build/probity_cards.py`
   post-render step from `[[statcards]]` / `[[cards]]` markers (see 3a).
+- **Consolas for code**: inline code and fenced blocks. Pandoc hardcodes
+  Courier for code; the `build/probity_fonts.py` post-render step swaps it to
+  Consolas. Equations stay in the default math font (Cambria Math): native
+  pptx math renders reliably that way.
 - **Theme colours**: the full Probity palette mapped onto the Office theme, so
   any native chart or shape that uses theme accents picks up brand colours.
 - Widescreen 16:9 (13.33 x 7.5 in).
@@ -307,5 +312,6 @@ PowerPoint: changes there will be lost on the next rebuild.
 - **Card slides need the post-render hook.** A `[[statcards]]` or `[[cards]]`
   slide without `_quarto.yml` + `build/probity_cards.py` falls back to a plain
   bullet list. Use `::` between fields and `*` for the one gold card.
-- **Calibri must be installed** for exact rendering. The theme falls back to a
-  system sans otherwise, which is acceptable but not identical.
+- **Calibri and Consolas must be installed** for exact rendering. Without them
+  the theme falls back to a system sans / mono, which is acceptable but not
+  identical.

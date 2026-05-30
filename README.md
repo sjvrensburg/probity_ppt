@@ -60,7 +60,8 @@ hook. See `SKILL.md` for the full pattern.
 | `template.qmd` | Worked example deck |
 | `build/build_reference.py` | Regenerates `reference.pptx` from the palette |
 | `build/probity_cards.py` | Post-render step that draws stat-card / three-card slides |
-| `_quarto.yml` | Wires the card post-render hook |
+| `build/probity_fonts.py` | Post-render step that sets Consolas for code |
+| `_quarto.yml` | Wires the post-render hooks |
 | `SKILL.md` | Guide for Claude on using the template |
 
 ## Rebuilding the reference document

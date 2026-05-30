@@ -1,3 +1,4 @@
 project:
   post-render:
     - python3 build/probity_cards.py
+    - python3 build/probity_fonts.py
