@@ -1,0 +1,3 @@
+project:
+  post-render:
+    - python3 build/probity_cards.py

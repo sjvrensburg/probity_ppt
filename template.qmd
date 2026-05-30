@@ -1,0 +1,85 @@
+---
+title: "Presentation title"
+subtitle: "A short, factual subtitle"
+author: "Author Name, Role"
+date: today
+date-format: "D MMMM YYYY"
+format: probity-pptx-pptx
+---
+
+# Part one: framing
+
+## A content slide
+
+Content slides carry the small navy logo, a hairline rule, a navy title, and
+the Probity wordmark in the footer. Keep one idea per slide.
+
+- Lead with the answer, then the qualification
+- Short bullets, sentence case, no terminal full stops on fragments
+- UK spelling throughout (analyse, behaviour, recognised)
+
+## Two columns
+
+::: {.columns}
+::: {.column width="50%"}
+**Left column.** Use columns for before/after or claim/evidence pairs. The
+navy lead-in phrase followed by a full stop is the Probity inline-emphasis
+pattern.
+:::
+::: {.column width="50%"}
+**Right column.** State sample sizes and limitations openly. Do not bury
+caveats.
+:::
+:::
+
+## A table
+
+| Variable        | Lag   | Correlation |
+|-----------------|-------|-------------|
+| GDP growth      | lag-1 | -0.93       |
+| Unemployment    | lag-1 | -0.41       |
+| Household debt  | lag-0 | 0.62        |
+
+: Loss-rate drivers, FY 2019/20 to FY 2023/24 {tbl-colwidths="[40,20,40]"}
+
+## Headline numbers
+
+[[statcards]]
+
+- Sample :: 6 :: Fiscal-year observations the model is fitted on
+- Fit :: 0.86 :: R-squared on lag-1 GDP, before the COVID-year check
+- *Multiplier :: R 14.9M :: Applied forward-looking provision uplift
+
+## Three steps
+
+[[cards]]
+
+- Estimate :: Fit the univariate model on the six fiscal-year observations and record the sign against theory.
+- Stress :: Drop the FY 2020/21 anomaly and refit. Report how far the fit moves.
+- Apply :: Scale every cell of the provision matrix by the single multiplier alpha.
+
+## A native chart
+
+```{r}
+#| echo: false
+#| fig-cap: "Provision multiplier by fiscal year"
+library(ggplot2)
+df <- data.frame(
+  year = c("2019/20", "2020/21", "2021/22", "2022/23"),
+  alpha = c(4.40, 20.10, 10.64, 7.85)
+)
+ggplot(df, aes(year, alpha)) +
+  geom_col(fill = "#0A325A", width = 0.6) +
+  geom_text(aes(label = sprintf("%.1f%%", alpha)), vjust = -0.4,
+            colour = "#0A325A", fontface = "bold") +
+  labs(x = NULL, y = NULL) +
+  theme_minimal(base_family = "Calibri") +
+  theme(
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_line(colour = "#D5DEE9", linewidth = 0.3),
+    axis.text = element_text(colour = "#6B7280")
+  )
+```
+
+# Thank you

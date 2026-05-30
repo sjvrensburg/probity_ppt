@@ -1,0 +1,7 @@
+/.quarto/
+*_files/
+*.knit.md
+# rendered decks (keep template.qmd source, not output)
+/template.pptx
+/build/*.pdf
+/build/slide-*.jpg
