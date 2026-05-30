@@ -28,9 +28,19 @@ instead. This one is decks only.
 
 ### 1. Set up the project
 
-The template is a self-contained Quarto extension. To start a new deck, copy
-the `_extensions/` folder and the `assets/` folder next to your `.qmd`, or work
-inside this repository directly. Then create a `.qmd` with this front matter:
+The template is a self-contained Quarto extension. Three ways to install it
+into another project:
+
+1. **Install script** (recommended): `./install.sh /path/to/your-project`
+2. **`quarto add`**: point at the repo root (not `_extensions/` directly):
+   `quarto add /path/to/probity_ppt --no-prompt`
+3. **Manual**: copy `_extensions/`, `build/`, and `assets/` into the target
+   project and add post-render hooks to `_quarto.yml`.
+
+If the deck lives in a subdirectory, the project root must have a `_quarto.yml`
+or Quarto will not discover the extension. See `README.md` for details.
+
+Then create a `.qmd` with this front matter:
 
 ```yaml
 ---

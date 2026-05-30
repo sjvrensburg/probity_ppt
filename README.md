@@ -11,8 +11,108 @@ quarto render template.qmd
 
 This produces `template.pptx`, a fully branded example deck.
 
-To start your own deck, copy `_extensions/` and `assets/` next to a new `.qmd`
-and set the format:
+## Installation
+
+### Option A: Use the install script (recommended)
+
+From the **repository root** of `probity_ppt`, run:
+
+```bash
+./install.sh /path/to/your-project
+```
+
+This copies the extension, build scripts, and assets into your project and
+ensures `_quarto.yml` has the required post-render hooks. It also validates the
+result.
+
+### Option B: `quarto add` from a local clone
+
+**Important:** point `quarto add` at the **repository root**, not at the
+`_extensions/` directory. Quarto discovers extensions by iterating subdirectories
+inside `_extensions/`; pointing at the extension directory itself yields
+"Found 0 extensions".
+
+```bash
+# Clone (or download) the template
+git clone <probity-ppt-url> /tmp/probity_ppt
+
+# From your project directory, install the extension:
+cd /path/to/your-project
+quarto add /tmp/probity_ppt --no-prompt
+```
+
+Then copy the build scripts and add post-render hooks manually:
+
+```bash
+cp -r /tmp/probity_ppt/build/ /path/to/your-project/build/
+```
+
+And ensure your project's `_quarto.yml` includes:
+
+```yaml
+project:
+  post-render:
+    - python3 build/probity_cards.py
+    - python3 build/probity_fonts.py
+```
+
+### Option C: Manual copy
+
+Copy three directories into your project root:
+
+```bash
+cp -r _extensions/ /path/to/your-project/
+cp -r build/       /path/to/your-project/
+cp -r assets/      /path/to/your-project/
+```
+
+Create or update `_quarto.yml` in the project root with the post-render hooks
+shown above.
+
+## Rendering from subdirectories
+
+If your `.qmd` files live in a subdirectory (e.g., `pipeline/docs/`), Quarto
+must discover the extension by walking upward from the document to the project
+root. This requires a `_quarto.yml` at the project root:
+
+```
+your-project/
+  _quarto.yml          <- required for subdirectory discovery
+  _extensions/
+    probity-pptx/
+  build/
+  pipeline/
+    docs/
+      presentation.qmd
+```
+
+Without `_quarto.yml`, Quarto does not treat the directory tree as a project and
+will not find `_extensions/` when rendering from inside a subdirectory. The
+error message is:
+
+```
+ERROR: Unable to read the extension 'probity-pptx'.
+```
+
+The fix is always the same: add a `_quarto.yml` at the project root. It can be
+minimal:
+
+```yaml
+project:
+  post-render:
+    - python3 build/probity_cards.py
+    - python3 build/probity_fonts.py
+```
+
+Then render from the project root:
+
+```bash
+quarto render pipeline/docs/presentation.qmd
+```
+
+## Authoring a deck
+
+To start a new deck, create a `.qmd` with this front matter:
 
 ```yaml
 ---
@@ -23,6 +123,9 @@ date: today
 format: probity-pptx-pptx
 ---
 ```
+
+The format key is `probity-pptx-pptx` (extension directory name `probity-pptx`,
+base format `pptx`).
 
 ## Layout rules
 
@@ -50,6 +153,15 @@ bullet list (fields separated by `::`, `*` marks the gold emphasis card):
 These are drawn by `build/probity_cards.py` via the `_quarto.yml` post-render
 hook. See `SKILL.md` for the full pattern.
 
+## Troubleshooting
+
+| Symptom | Cause | Fix |
+|---|---|---|
+| `quarto add` says "Found 0 extensions" | Path points to `_extensions/probity-pptx/` instead of repo root | Point `quarto add` at the repository root directory that **contains** `_extensions/` |
+| `Unable to read the extension 'probity-pptx'` | No `_quarto.yml` at project root, or `_extensions/` is missing | Add a `_quarto.yml` at the project root and ensure `_extensions/probity-pptx/` exists |
+| Card markers render as plain bullets | Post-render hooks not wired up | Ensure `_quarto.yml` has the `post-render` entries and `build/probity_cards.py` is present |
+| Code appears in Courier, not Consolas | `build/probity_fonts.py` not running | Add the fonts post-render hook to `_quarto.yml` |
+
 ## What is in here
 
 | Path | Purpose |
@@ -62,6 +174,7 @@ hook. See `SKILL.md` for the full pattern.
 | `build/probity_cards.py` | Post-render step that draws stat-card / three-card slides |
 | `build/probity_fonts.py` | Post-render step that sets Consolas for code |
 | `_quarto.yml` | Wires the post-render hooks |
+| `install.sh` | Helper script to install extension into another project |
 | `SKILL.md` | Guide for Claude on using the template |
 
 ## Rebuilding the reference document
