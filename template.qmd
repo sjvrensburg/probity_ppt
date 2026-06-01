@@ -7,9 +7,9 @@ date-format: "D MMMM YYYY"
 format: probity-pptx-pptx
 ---
 
-# Part one: framing
+# Part One: Framing
 
-## A content slide
+## A Content Slide
 
 Content slides carry the small navy logo, a hairline rule, a navy title, and
 the Probity wordmark in the footer. Keep one idea per slide.
@@ -18,7 +18,7 @@ the Probity wordmark in the footer. Keep one idea per slide.
 - Short bullets, sentence case, no terminal full stops on fragments
 - UK spelling throughout (analyse, behaviour, recognised)
 
-## Two columns
+## Two Columns
 
 ::: {.columns}
 ::: {.column width="50%"}
@@ -32,7 +32,7 @@ caveats.
 :::
 :::
 
-## A table
+## A Table
 
 | Variable        | Lag   | Correlation |
 |-----------------|-------|-------------|
@@ -42,7 +42,7 @@ caveats.
 
 : Loss-rate drivers, FY 2019/20 to FY 2023/24 {tbl-colwidths="[40,20,40]"}
 
-## Headline numbers
+## Headline Numbers
 
 [[statcards]]
 
@@ -50,7 +50,7 @@ caveats.
 - Fit :: 0.86 :: R-squared on lag-1 GDP, before the COVID-year check
 - *Multiplier :: R 14.9M :: Applied forward-looking provision uplift
 
-## Three steps
+## Three Steps
 
 [[cards]]
 
@@ -58,7 +58,7 @@ caveats.
 - Stress :: Drop the FY 2020/21 anomaly and refit. Report how far the fit moves.
 - Apply :: Scale every cell of the provision matrix by the single multiplier alpha.
 
-## Code renders in Consolas
+## Code Renders in Consolas
 
 Inline code such as `alpha <- 1` and fenced blocks use Consolas:
 
@@ -67,7 +67,7 @@ fit <- lm(loss_rate ~ gdp_lag1, data = panel)
 summary(fit)$r.squared
 ```
 
-## A native chart
+## A Native Chart
 
 ```{r}
 #| echo: false
@@ -91,4 +91,4 @@ ggplot(df, aes(year, alpha)) +
   )
 ```
 
-# Thank you
+# Thank You
