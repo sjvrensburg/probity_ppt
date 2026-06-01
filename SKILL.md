@@ -81,7 +81,7 @@ writing a new deck.
 **Content slide:**
 
 ```markdown
-## Lead with the answer
+## Lead with the Answer
 
 - Short bullets, sentence case, no terminal full stops on fragments
 - One idea per slide
@@ -91,7 +91,7 @@ writing a new deck.
 **Two columns** (use for claim/evidence or before/after pairs):
 
 ```markdown
-## Two columns
+## Two Columns
 
 ::: {.columns}
 ::: {.column width="50%"}
@@ -151,7 +151,7 @@ figure).
 **Stat callout row** (`[[statcards]]`, fields: `label :: number :: description`):
 
 ```markdown
-## Headline numbers
+## Headline Numbers
 
 [[statcards]]
 
@@ -167,7 +167,7 @@ label and white number.
 **Three-card row** (`[[cards]]`, fields: `label :: body`):
 
 ```markdown
-## Three steps
+## Three Steps
 
 [[cards]]
 
@@ -257,7 +257,11 @@ most important number in a stat group. Never use gold for body text or chart
 fills.
 
 Voice rules: no em dashes, UK spelling, plain register, short sentences, lead
-with the answer then the qualification, state limitations openly. Money:
+with the answer then the qualification, state limitations openly. Slide titles
+and section dividers use title case (capitalise principal words; keep articles,
+conjunctions, and short prepositions lower-case in the middle) — `Loss Rates
+Rose 40%`, not `Loss rates rose 40%`. Bullets, captions, and body text stay
+sentence case. Money:
 `R 14,903,239` in tables, `R 14.9M` in prose. Percentages: `12.5%` (no space).
 Fiscal years: `FY 2024/25`. Dates: `2024-06-30` in tables, "30 June 2024" in
 prose.
